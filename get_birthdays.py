@@ -88,20 +88,17 @@ def get_birthdays_per_week(users):
                 current_birthday_date = datetime(year=current_year+1, month=birthday_month, day=birthday_day)
 
             current_birthday_date_weekday = week[current_birthday_date.weekday()]
-            if current_birthday_date_weekday == 'Saturday' or current_birthday_date_weekday == 'Sunday':
+            if current_birthday_date_weekday in ('Saturday', 'Sunday'):
                 current_birthday_date_weekday = 'Monday'
 
-            if birthdays.get(current_birthday_date_weekday) == None:
+            if birthdays.get(current_birthday_date_weekday) is None:
                 birthdays[current_birthday_date_weekday] = [name]
             else:
                 birthdays[current_birthday_date_weekday].append(name)
 
-    birthdays_list = []
     for birthday in birthdays:
         names = ', '.join(birthdays[birthday])
         str = f"{birthday}: {names}"
-        birthdays_list.append(str)
-    for day in birthdays_list:
-        print(day)
+        print(str)
 
 get_birthdays_per_week(users)
